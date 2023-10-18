@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header" class="dark:bg-gray-800">
         <h2 class="dark:bg-gray-800 font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Chats') }}
         </h2>
     </x-slot>
 
@@ -21,7 +21,7 @@
         </div>
 
         <div class="col-span-9">
-            <h5 class="start-head">Click To Start Chat</h5>
+            <h1 class="start-head">Click To Start Chat</h1>
             <div class="chat-section">
                 <div id="chat-container">
                  

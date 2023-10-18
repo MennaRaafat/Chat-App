@@ -13,8 +13,11 @@
 #chat-container{
     background-color: whitesmoke;
     width: 100%;
-    height: 400px;
+    height: 500px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .chat-section{
@@ -29,6 +32,9 @@
 .start-head{
     color: white;
     display: flex;
+    margin-top: 2.5%;
+    margin-left: 35%;
+    font-size: 23px;
 }
 
 .offline{
@@ -39,15 +45,25 @@
 }
 
 .current-user-chat{
-    text-align: right;
+    align-self: flex-end;
+    text-align: right !important;
     margin: 10px;
     color: black;
+    background-color: rgb(215, 212, 212);
+    border-radius: 15px;
+    padding: 10px !important;
+    width: 20%;
 }
 
 .distant-user-chat{
+    align-self: flex-start;
     text-align: left;
     margin: 10px;
     color: black;
+    background-color: rgba(215, 212, 212, 0.674);
+    border-radius: 15px;
+    padding: 10px !important;
+    width: 20%;
 }
 
 .modal-footer .btn-danger{
@@ -78,8 +94,12 @@
 #group-chat-container{
     background-color: whitesmoke;
     width: 100%;
-    height: 400px;
+    height: 500px;
     overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+
 }
 
 .group-chat-section{
@@ -89,4 +109,12 @@
 .group-start-head{
     color: white;
     display: flex;
+}
+.current-user-chat .user-name{
+    font-size: 12px !important;
+    margin-right:75%;
+}
+.distant-user-chat .user-name{
+    font-size: 12px !important;
+    margin-left:75%;
 }

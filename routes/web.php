@@ -37,6 +37,7 @@ Route::post('/save-group',  [GroupController::class, 'saveGroup'])->middleware([
 Route::get('/view-groups',  [GroupController::class, 'loadGroups'])->middleware(['auth', 'verified'])->name('view-groups');
 Route::get('/view-members',  [GroupController::class, 'viewMembers'])->middleware(['auth', 'verified'])->name('view-members');
 Route::get('/user-groups',  [GroupController::class, 'groupChats'])->middleware(['auth', 'verified'])->name('user-groups');
+Route::get('/group-info/{id}',  [GroupController::class, 'getGroup'])->middleware(['auth', 'verified'])->name('group-info');
 
 Route::post('/group-chat',  [GroupChatController::class, 'groupChat'])->middleware(['auth', 'verified'])->name('group-chat');
 Route::post('/load-group-chat',  [GroupChatController::class, 'loadGroupChat'])->middleware(['auth', 'verified'])->name('load-group-chat');

@@ -14,6 +14,7 @@
                 <li class="bg-gray-400 px-7 list-group-item group-list m-3" data-id="{{$group->group_id}}">
                     <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg">
                     {{$group->groups->name}}
+                    <?php $groupId = $group->group_id; ?>
                 </li>
               @endforeach
             </ul>
@@ -28,7 +29,9 @@
                 <form action="" id="group-chat-form">
                     <input class="w-75 mt-3" type="text" name="message" placeholder="Enter Your Message" id="group-message">
                     <input type="submit" value="Send Message" class="btn btn-primary px-5">
-                </form >
+                    <a href="/group-info/{{$groupId}}" class="text-white">Group Info</a>
+
+                </form>
             </div>
         </div>
 </div>

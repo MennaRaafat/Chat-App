@@ -14,4 +14,8 @@ class GroupChat extends Model
         'group_id',
         'message'
     ];
+
+    public function users(){
+        return $this->belongsTo(User::class , 'sender_id');
+    }
 }

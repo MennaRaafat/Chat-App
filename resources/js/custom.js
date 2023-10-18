@@ -16,6 +16,7 @@ $(document).ready(function(){
     $("#chat-form").submit(function(e){
         e.preventDefault();
        var message = $("#message").val();
+       console.log(e);
        $.ajax({
         "url":"/save-chat",
         "type":"POST",
@@ -25,10 +26,16 @@ $(document).ready(function(){
             message:message
         },
         success:function(response){
+            console.log(response);
             var message = response.data.message;
             var html = '<div class="current-user-chat"id="'+ response.data.id+'-chat"> <h5>'+ message +'</h5></div>';
             $("#message").val("");
             $("#chat-container").append(html);
+        //       console.log(receiver_id)
+        //     if(user_id == receiver_id){
+        //       $('.user-list').css('borderColor', 'green');
+        //        console.log("hi");
+        // }
         }
        })
     })
@@ -158,6 +165,7 @@ Echo.join('status-update')
 
    Echo.private('chat-message')
        .listen('MessageEvent' , (data)=>{
+        console.log(data);
         if(sender_id == data.chat.receiver_id && receiver_id == data.chat.sender_id){
             var html = '<div class="distant-user-chat"> <h5>'+ data.chat.message +'</h5></div>';
             $("#message").val("");
@@ -226,7 +234,10 @@ function loadGroupChat(){
                 addClass = 'distant-user-chat';
             }
             html += ` <div class = "${addClass}"> 
-               <h5>${chat[i].message}</h5>
+            <div id="des-chat">
+               <h4>${chat[i].message}</h4>
+               <p class="user-name">${chat[i].users.name}</p>
+            </div>
             </div>
             `;
           }

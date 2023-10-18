@@ -25,10 +25,11 @@ class GroupChatController extends Controller
 
     public function loadGroupChat(Request $request){
         try{
-          $chats = GroupChat::where('group_id' , $request->group_id)->get();
-          return response()->json(["success"=>true , "data"=>$chats]);
+            $chats = GroupChat::where('group_id', $request->group_id)->with('users')->get();
+            return response()->json(["success"=>true , "data"=>$chats]);
         }catch(Exception $e){
           return response()->json(["success"=>false , "msg"=>$e->getMessage()]);
         }
       }
+
 }

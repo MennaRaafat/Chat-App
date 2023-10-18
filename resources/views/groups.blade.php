@@ -1,15 +1,19 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+      <div class="d-flex">
+        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight mr-5">
             {{ __('Groups') }}
         </h2>
+
+        <button type="button" class="text-white ml-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Create Group
+</button>
+</div>
     </x-slot>
 
     <div class="p-12">
         <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary m-5" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>
+
 
 <table class="table table-striped">
   <thead>

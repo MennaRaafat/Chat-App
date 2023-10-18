@@ -17,6 +17,13 @@ class GroupController extends Controller
           return view('groups',['groups' => $groups]);
         }
 
+        public function getGroup($id){
+          $groupInfo = Group::where('id' , $id)->get()->first();
+          $creator = User::where('id' , $groupInfo->creator_id)->get()->first();
+          $groupMembers=GroupMember::where('group_id' , $groupInfo->id )->get();
+          return view('groupInfo',['groupInfo' => $groupInfo , 'creator'=>$creator , 'groupMembers' => $groupMembers]);
+        }
+
         public function groupChats(){
           $groups = GroupMember::where('user_id' , Auth::id())->get();
           return view('groupChat',['groups' => $groups]);
