@@ -12,8 +12,7 @@
             <ul class="list-group">
               @foreach($users as $user)
                 <li class="bg-gray-400 px-7 list-group-item user-list m-3" id="msg-{{$user->id}}" data-id="{{$user->id}}">
-                    <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg">
-                    {{$user->name}}
+                <img src="https://ui-avatars.com/api/?name={{$user->name}}&background=0D8ABC" style="width:40px; height:40px; border-radius:50%;">                    {{$user->name}}
                     <b><sub id="{{$user->id}}-status" class="offline">offline</sub></b>
                 </li>
               @endforeach
@@ -23,11 +22,14 @@
         <div class="col-span-9">
             <h1 class="start-head">Click To Start Chat</h1>
             <div class="chat-section">
+                <div class="d-flex" id="chat-name">
+
+                </div>
                 <div id="chat-container">
                  
                 </div>
-                <form action="" id="chat-form">
-                    <input lass="w-75 mt-3" type="text" name="message" placeholder="Enter Your Message" id="message">
+                <form action="" id="chat-form" style="margin-left:3%;">
+                    <input class="w-75 mt-3" type="text" name="message" placeholder="Enter Your Message..." id="message">
                     <input type="submit" value="Send Message" class="btn btn-primary px-5">
                 </form >
             </div>

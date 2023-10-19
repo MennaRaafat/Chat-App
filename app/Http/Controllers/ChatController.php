@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Chat;
+use App\Models\User;
 use App\Events\MessageEvent;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,8 @@ class ChatController extends Controller
         Chat::where('receiver_id', Auth::id())
         ->whereNull('last_read')
         ->update(['last_read' => $lastRead, 'status' => 1]);
+        $receiver_user = User::where('id' ,$request->receiver_id)->get();
+        $sender_user = User::where('id' ,$request->sender_id)->get();
         $chats = Chat::where(function($query)use($request){
           $query -> where('sender_id' , '=' ,$request->sender_id)
                  ->orWhere('sender_id' , '=' , $request->receiver_id);
@@ -37,7 +40,7 @@ class ChatController extends Controller
         $query -> where('receiver_id' , '=' , $request->receiver_id)
                ->orWhere('receiver_id' , '=' ,$request->sender_id);
               })->get();
-        return response()->json(["success"=>true , "data"=>$chats]);
+        return response()->json(["success"=>true , "data"=>[$receiver_user,$chats,$sender_user]]);
       }catch(Exception $e){
         return response()->json(["success"=>false , "msg"=>$e->getMessage()]);
       }

@@ -43,13 +43,9 @@ $(document).ready(function(){
         success:function(response){
             console.log(response);
             var message = response.data.message;
-            var html = '<div class="current-user-chat"id="'+ response.data.id+'-chat"> <h5>'+ message +'</h5></div>';
+            var html = '<div class="current-user-chat"id="'+ response.data.id+'-chat"> <h4>'+ message +'</h4><p class="user-name">You</p></div>';
             $("#message").val("");
             $("#chat-container").append(html);
-            // var user_id = $(".user-list").attr('data-id');
-        //     if(user_id === receiver_id ){
-        //         $("#msg-"+user_id).addClass('unreaded-msg');
-        // }
         }
        })
     })
@@ -138,17 +134,27 @@ function loadChat(){
         },
         success:function(response){
         $("#chat-container").empty();
-          let chat = response.data;
+        $("#chat-name").empty();
+          let chat = response.data[1];
           var addClass = '';
           var html = '';
+          var receiver_user = response.data[0][0];
+          var sender_user = response.data[2][0];
+          console.log(response.data[2][0])
+          var userChat = '<img src="https://ui-avatars.com/api/?name=' + receiver_user.name + '&background=0D8ABC" style="width:50px; height:50px; border-radius:50%;"><h1>' + receiver_user.name + '</h1>';
+          $("#chat-name").append(userChat);
+          var user_name = '';
           for(var i=0; i<chat.length; i++){
             if(chat[i].sender_id == sender_id){
                addClass = 'current-user-chat';
+               user_name = "You";
             }else{
                 addClass = 'distant-user-chat';
+                user_name = receiver_user.name;
             }
             html += ` <div class = "${addClass}"> 
-               <h5>${chat[i].message}</h5>
+               <h4>${chat[i].message}</h4>
+               <p class="user-name">${user_name}</p>
             </div>
             `;
             $("#msg-"+chat[i].sender_id).removeClass('unreaded-msg');
