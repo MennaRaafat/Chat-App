@@ -220,7 +220,7 @@ $(document).ready(function(){
         },
         success:function(response){
             var message = response.data.message;
-            var html = '<div class="current-user-chat" id="'+ response.data.id+'-chat"> <h5>'+ message +'</h5></div>';
+            var html = '<div class="current-user-chat" id="'+ response.data.id+'-chat"> <h4>'+ message +'</h4><p class="user-name">You</p></div></div>';
             $("#group-message").val("");
             $("#group-chat-container").append(html);
         }
@@ -252,22 +252,31 @@ function loadGroupChat(){
           let chat = response.data;
           var addClass = '';
           var html = '';
+          var user_name='';
+          var imageHTML = '';
           for(var i=0; i<chat.length; i++){
             if(chat[i].sender_id == sender_id){
                addClass = 'current-user-chat';
+               user_name = 'You';
+               imageHTML = '';
             }else{
                 addClass = 'distant-user-chat';
-            }
-            html += ` <div class = "${addClass}"> 
-            <div id="des-chat">
+                user_name = chat[i].users.name;}
+                if (addClass === 'distant-user-chat') {
+                    imageHTML = `<img src="https://ui-avatars.com/api/?name=${chat[i].users.name}&background=0D8ABC" style="width:30px; height:30px; border-radius:50%;margin-top:-130%;margin-left:-100%;">`;
+                  }           
+            html += ` <div class = "${addClass} d-flex"> 
+            <div>
+            ${imageHTML}
+            </div>
+            <div>
                <h4>${chat[i].message}</h4>
-               <p class="user-name">${chat[i].users.name}</p>
+               <p class="user-name">${user_name}</p>
             </div>
             </div>
             `;
           }
           $("#group-chat-container").append(html);
-
         }
     })
 }
