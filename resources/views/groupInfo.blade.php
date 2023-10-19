@@ -18,6 +18,7 @@
        <h5 class="card-title">{{$groupInfo->name}}</h5>
          @if(auth()->user()->name == $creator->name)
          <p class="card-text">Group Admin: You</p>
+         <a href="" data-bs-toggle="modal" data-bs-target="#memberModal" id="view-members" data-limit="{{$groupInfo->join_limit}}" data-id="{{$groupInfo->id}}">Add Memebers</a>
          @else
           <p class="card-text">Group Admin: {{$creator->name}}</p>
          @endif
@@ -31,6 +32,41 @@
        @endforeach
        @endif  
     </div>
+</div>
+
+<div class="modal fade" id="memberModal" tabindex="-1" aria-labelledby="memberModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content p-3">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="memberModalLabel">Members</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form id="addMembers">
+         <input type="hidden" name="id" id ="group-id" >
+         <input type="hidden" name="join_limit" id ="group-limit" >
+        
+         <table class="table table-striped" id="membersTable">
+            <thead>
+               <tr>
+                 <th scope="col">Select</th>
+                 <th scope="col">Name</th>
+               </tr>
+            </thead>
+            <tbody id="membersTableBody">
+
+            </tbody>
+         </table>
+     
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+        <button id="addMember" type="submit" class="btn btn-success">Add</button>
+      </div>
+      </form>
+
+    </div>
+  </div>
 </div>
 
     </div>

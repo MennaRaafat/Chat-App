@@ -12,6 +12,7 @@ class Chat extends Model
     protected $fillable=[
         'receiver_id',
         'sender_id',
-        'message'
+        'message',
+        'last_read'
     ];
 }

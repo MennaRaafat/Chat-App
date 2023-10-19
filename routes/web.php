@@ -27,6 +27,9 @@ Route::get('/dashboard',  [UserController::class, 'loadDash'])->middleware(['aut
 Route::post('/save-chat',  [ChatController::class, 'saveChat'])->middleware(['auth', 'verified'])->name('save-chat');
 Route::post('/load-chat',  [ChatController::class, 'loadChat'])->middleware(['auth', 'verified'])->name('load-chat');
 
+Route::get('/get-unread',  [ChatController::class, 'getUnRead'])->middleware(['auth', 'verified'])->name('get-unread');
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

@@ -6,6 +6,22 @@ $.ajaxSetup({
 
 
 $(document).ready(function(){
+
+    $.ajax({
+        "url":"/get-unread",
+        "type":"GET",
+        success:function(response){
+            console.log(response);
+            for(var i =0; i<response.data.length; i++){
+                console.log(response.data[i].last_read);
+                console.log(response.data[i].status);
+                if(response.data[i].last_read == null && response.data[i].status == 0){
+                    $("#msg-"+response.data[i].sender_id).addClass('unreaded-msg');
+                }
+            }
+        }
+    })
+
     $(".user-list").click(function(){
         var userId = $(this).attr('data-id');
         receiver_id = userId;
@@ -16,7 +32,6 @@ $(document).ready(function(){
     $("#chat-form").submit(function(e){
         e.preventDefault();
        var message = $("#message").val();
-       console.log(e);
        $.ajax({
         "url":"/save-chat",
         "type":"POST",
@@ -31,10 +46,9 @@ $(document).ready(function(){
             var html = '<div class="current-user-chat"id="'+ response.data.id+'-chat"> <h5>'+ message +'</h5></div>';
             $("#message").val("");
             $("#chat-container").append(html);
-        //       console.log(receiver_id)
-        //     if(user_id == receiver_id){
-        //       $('.user-list').css('borderColor', 'green');
-        //        console.log("hi");
+            // var user_id = $(".user-list").attr('data-id');
+        //     if(user_id === receiver_id ){
+        //         $("#msg-"+user_id).addClass('unreaded-msg');
         // }
         }
        })
@@ -111,12 +125,16 @@ $(document).ready(function(){
 })
 
 function loadChat(){
+
+ var currentDate = new Date();
+ var last_read = currentDate.toISOString();
     $.ajax({
         "url":"/load-chat",
         "type":"POST",
         "data":{
             sender_id:sender_id,
             receiver_id:receiver_id,
+            last_read:last_read
         },
         success:function(response){
         $("#chat-container").empty();
@@ -133,8 +151,9 @@ function loadChat(){
                <h5>${chat[i].message}</h5>
             </div>
             `;
-            $("#chat-container").append(html);
+            $("#msg-"+chat[i].sender_id).removeClass('unreaded-msg');
           }
+          $("#chat-container").append(html);
         }
     })
 }
@@ -165,12 +184,12 @@ Echo.join('status-update')
 
    Echo.private('chat-message')
        .listen('MessageEvent' , (data)=>{
-        console.log(data);
         if(sender_id == data.chat.receiver_id && receiver_id == data.chat.sender_id){
             var html = '<div class="distant-user-chat"> <h5>'+ data.chat.message +'</h5></div>';
             $("#message").val("");
             $("#chat-container").append(html); 
         }
+        $("#msg-"+data.chat.sender_id).addClass('unreaded-msg');
       })
 
 $(document).ready(function(){

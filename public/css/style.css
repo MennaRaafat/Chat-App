@@ -37,6 +37,11 @@
     font-size: 23px;
 }
 
+.unreaded-msg{
+    background-color: rgba(136, 177, 189, 0.36);
+    font-weight:bolder;
+}
+
 .offline{
     color: red;
 }
@@ -109,6 +114,9 @@
 .group-start-head{
     color: white;
     display: flex;
+    margin-top: 2.5%;
+    margin-left: 35%;
+    font-size: 23px;
 }
 .current-user-chat .user-name{
     font-size: 12px !important;

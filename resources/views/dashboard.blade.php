@@ -11,7 +11,7 @@
         <div class="col-span-3">
             <ul class="list-group">
               @foreach($users as $user)
-                <li class="bg-gray-400 px-7 list-group-item user-list m-3" data-id="{{$user->id}}">
+                <li class="bg-gray-400 px-7 list-group-item user-list m-3" id="msg-{{$user->id}}" data-id="{{$user->id}}">
                     <img src="https://img.freepik.com/premium-vector/man-avatar-profile-picture-vector-illustration_268834-538.jpg">
                     {{$user->name}}
                     <b><sub id="{{$user->id}}-status" class="offline">offline</sub></b>
